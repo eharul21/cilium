@@ -16,6 +16,7 @@ package watchers
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/cilium/cilium/pkg/comparator"
 	"github.com/cilium/cilium/pkg/k8s"
@@ -58,6 +59,7 @@ func (k *K8sWatcher) nodesInit(k8sClient *k8s.K8sClient) {
 				if oldNode := k8s.ObjToV1Node(oldObj); oldNode != nil {
 					valid = true
 					if newNode := k8s.ObjToV1Node(newObj); newNode != nil {
+						fmt.Printf("AANM NEW NODE event %+v\n", newNode)
 						if isCiliumTainted(newNode) {
 							k8sClient.ReMarkNodeReady()
 						}

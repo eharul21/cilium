@@ -270,13 +270,13 @@ func removeNodeTaint(ctx context.Context, c kubernetes.Interface, nodeGetter nod
 		log.WithFields(logrus.Fields{
 			logfields.NodeName: nodeName,
 			"taint":            ciliumio.AgentNotReadyNodeTaint,
-		}).Debug("Taint not found in node")
+		}).Info("Taint not found in node")
 		return nil
 	}
 	log.WithFields(logrus.Fields{
 		logfields.NodeName: nodeName,
 		"taint":            ciliumio.AgentNotReadyNodeTaint,
-	}).Debug("Removing Node Taint")
+	}).Info("Removing Node Taint")
 
 	k8sNode.Spec.Taints = k8sNode.Spec.Taints[:i]
 
